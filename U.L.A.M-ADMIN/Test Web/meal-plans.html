@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>U.L.A.M Admin - Meal Plans</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      background-color: #f4f6f9;
+    }
+
+    /* Sidebar (consistent with other pages) */
+    .sidebar {
+      width: 220px;
+      background-color: #1e1e2f;
+      color: #fff;
+      padding: 20px;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-align: center;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      margin: 10px 0;
+      border-radius: 6px;
+      background-color: #2c2c3e;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li.logout {
+      background-color: #f44336;
+    }
+
+    .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 45px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 6px;
+    }
+
+    .sidebar ul li a:hover {
+      background-color: #3a3a5a;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px;
+    }
+
+    .header {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .back-to-dashboard {
+      display: inline-block;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      background-color: #1e1e2f;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .back-to-dashboard:hover {
+      background-color: #3a3a5a;
+    }
+
+    /* Meal Plan Specific Styles */
+    .meal-controls {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .meal-controls select, .meal-controls button {
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .meal-controls button {
+      background-color: #1e1e2f;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .day-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .day-card h3 {
+      color: #333;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .meal-item {
+      background-color: #f9f9f9;
+      padding: 8px 12px;
+      margin: 8px 0;
+      border-radius: 4px;
+    }
+
+    .meal-item strong {
+      color: #1e1e2f;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>U.L.A.M Admin</h2>
+    <ul>
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="members.html">Members</a></li>
+      <li><a href="meal-plans.html">Meal Plans</a></li>
+      <li><a href="reports.html">Reports</a></li>
+      <li><a href="settings.html">Settings</a></li>
+      <li class="logout"><a href="login.html">Logout</a></li>
+    </ul>
+  </div>
+  
+  <div class="main">
+    <a href="dashboard.html" class="back-to-dashboard">Back to Dashboard</a>
+    <div class="header">Meal Plans Management</div>
+    
+    <div class="meal-controls">
+      <select id="diet-filter">
+        <option value="all">All Dietary Plans</option>
+        <option value="keto">Keto</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+      </select>
+      <button id="generate-plan">Generate New Plan</button>
+      <button id="add-meal">+ Add Custom Meal</button>
+    </div>
+
+    <div class="week-grid">
+      <div class="day-card">
+        <h3>Monday</h3>
+        <div class="meal-item" data-diet="keto">
+          <strong>Breakfast:</strong> Scrambled eggs with avocado
+        </div>
+        <div class="meal-item" data-diet="vegetarian">
+          <strong>Lunch:</strong> Quinoa salad with feta
+        </div>
+        <div class="meal-item" data-diet="vegan">
+          <strong>Dinner:</strong> Lentil curry with rice
+        </div>
+      </div>
+      
+      <!-- Tuesday through Sunday cards would go here -->
+      <!-- Duplicate the day-card structure for each day -->
+      
+    </div>
+  </div>
+
+  <script>
+    // Filter functionality
+    document.getElementById('diet-filter').addEventListener('change', function() {
+      const diet = this.value;
+      document.querySelectorAll('.meal-item').forEach(meal => {
+        meal.style.display = (diet === 'all' || meal.dataset.diet === diet) ? 'block' : 'none';
+      });
+    });
+
+    // Button actions
+    document.getElementById('generate-plan').addEventListener('click', function() {
+      alert('Generating new meal plan... (This would call your backend)');
+    });
+
+    document.getElementById('add-meal').addEventListener('click', function() {
+      alert('Opening meal creation form...');
+    });
+  </script>
+</body>
+</html>
